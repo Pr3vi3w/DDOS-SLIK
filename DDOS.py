@@ -37,7 +37,7 @@ os.system("figlet Attack SLIK")
 print "Loading…"
 time.sleep(5)
 print10%
-███▒▒▒▒▒▒▒
+██▒▒▒▒▒▒▒
 time.sleep(5)
 print30%
 █████▒▒▒▒▒
