@@ -44,11 +44,9 @@ print30%
 
 time.sleep(5)
 
-print50%
-███████▒▒▒
-                                                                                    time.sleep(5)
-                                                                                    print"100%
-██████████                                                    time.sleep(3)
+print"100%
+██████████   
+time.sleep(3)
 
 
 
