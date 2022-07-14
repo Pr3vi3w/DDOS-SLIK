@@ -1,4 +1,5 @@
 from scapy.all 
+import *
 
 
 # target IP address (should be a testing router/firewall)
